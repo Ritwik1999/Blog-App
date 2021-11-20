@@ -33,4 +33,20 @@ Router.post('/signup', (req, res) => {
     });
 });
 
+Router.post('/login', (req, res) => {
+    let errors = [];
+    User.findOne({ username: req.body.username }).then(user => {
+        if (user && bcrypt.compareSync(req.body.password, user.password) === true) {
+            req.session.user = user;
+            res.redirect('/dashboard');
+        } else {
+            errors.push('Could not log in!');
+            res.render('login', { errors });
+        }
+    }).catch(err => {
+        errors.push('User does not exist');
+        res.render('login', {errors: []});
+    });
+});
+
 module.exports = Router;

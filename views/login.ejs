@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Login</title>
 </head>
 
 <body>
@@ -14,20 +14,16 @@
             <%= error %>
         </p>
     <% }) %>
+    
+    <h1>Login</h1>
 
-    <h1>Signup</h1>
-
-    <form action="/auth/local/signup" method="post">
-        <input type="email" name="email" placeholder="email" required>
-        <br>
-
+    <form action="/auth/local/login" method="post">
         <input type="text" name="username" placeholder="username" required>
         <br>
 
         <input type="password" name="password" placeholder="password" required>
         <br>
 
-        <input type="url" name="profile_pic" placeholder="your profile picture link">
         <input type="submit" value="Submit">
     </form>
 </body>
