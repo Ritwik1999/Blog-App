@@ -10,7 +10,7 @@ const baseRoutes = require('./Controller/Routes/base.routes');
 const userRoutes = require('./Controller/Routes/user.routes');
 const fbRoutes = require('./Controller/Routes/fb.routes');
 const localRoutes = require('./Controller/Routes/local.routes');
-const articleRoutes = require('./Controller/Routes/articles.routes');
+const articleRoutes = require('./Controller/Routes/article.routes');
 
 // Initialise and configure the app
 const app = express();
@@ -24,7 +24,7 @@ mongoose.connect(db);
 // Setup the app
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: key.session.secret }));
+app.use(session({ secret: key.session.secret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public'));
