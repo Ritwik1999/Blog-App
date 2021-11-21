@@ -37,6 +37,11 @@ app.use('/auth/facebook', fbRoutes);
 app.use('/post', articleRoutes);
 app.use('/user', userRoutes);
 
+// Dummy route necessary for FB OAuth
+app.get('/privacyPolicy', (req, res) => {
+    res.send('Privacy Policy');
+});
+
 // Start the server
 app.listen(port, (error) => {
     if (!error) {
