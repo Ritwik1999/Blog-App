@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Articles</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -13,21 +13,20 @@
     <a href="/search">Search</a>
     <a href="/new_article">Create a new article</a>
 
-    <input type="text" id="searcher" placeholder="search">
-    <button id="src-btn">Search</button>
+    <h1>Dashboard</h1>
 
     <% articles.forEach(article=> { %>
         <h2>
             <%= article.title %>
         </h2>
 
-        <p> Created By
+        <p>Created By
             <a href="/user/profile/<%= article.author.username %> ">
                 <%= article.author.username %>
             </a>
         </p>
 
-        <img src="<%= article.image %> " alt="Article Picture">
+        <img src="<%= article.image %> " alt="">
 
         <p>
             Description: <%= article.description %>
@@ -39,16 +38,8 @@
                 <%= tag %>
             </a>
         <% }) %>
-        
+
     <% }) %>
-
-    <script>
-        let srcbtn = document.getElementById('src-btn');
-        srcbtn.addEventListener('click', function () {
-            window.location = "/search/" + document.getElementById('searcher').value;
-        });
-    </script>
-
 </body>
 
 </html>
