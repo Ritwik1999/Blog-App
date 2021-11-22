@@ -58,4 +58,34 @@ Router.get('/dashboard', (req, res) => {
     }
 });
 
+Router.get('/profile/:username', (req, res) => {
+    if (req.session.user || req.user) {
+        let user = req.session.user || req.user;
+        let alreadyFollowingParamsUser = user.people_you_are_following.includes(req.params.username);
+
+        User.findOne({ username: req.params.username })
+            .then(user => {
+                Article.find({ author: user._id })
+                    .then(articles => {
+                        res.render('profile', { articles, user, alreadyFollowingParamsUser });
+                    });
+            })
+            .catch(err => {
+                // if no user is found
+                res.recirect('/dashboard');
+            });
+    } else {
+        res.redirect('/');
+    }
+});
+
+Router.get('/profile', (req, res) => {
+    if (req.session.user || req.user) {
+        let user = req.session.user || req.user;
+        res.redirect('/profile/' + user.username);
+    } else {
+        res.redirect('/');
+    }
+});
+
 module.exports = Router;

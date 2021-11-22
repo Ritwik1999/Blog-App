@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | <%= user.username %>
+    </title>
+    <style>
+        img {
+            max-height: 200px;
+            width: auto;
+        }
+
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/search">Search</a>
+    <a href="/new_article">Create a new article</a>
+    <a href="/profile">Profile</a>
+    <br>
+
+    <% if (alreadyFollowingParamsUser==false) { %>
+        <button class="follow-button" id="<%= user.username %> ">Follow this user</button>
+    <% } %>
+
+    <div>
+        <h2>
+            <%= user.username %>
+        </h2>
+        <img src="<%= user.profile_pic %> " alt="">
+        <br>
+    </div>
+
+    <% articles.forEach(article=> { %>
+        <hr>
+        <div>
+            <h2>
+                <%= article.title %>
+            </h2>
+            <img src="<%= article.image %> ">
+            <br>
+            <p>
+                <%= article.description %>
+            </p>
+
+            <span>
+                <% article.tags.forEach(tag=> { %>
+                    <a href="/search/<%= tag %> " class="article-tag">
+                        <%= tag %>
+                    </a>
+                    <% }) %>
+            </span>
+        </div>
+    <% }) %>
+
+    <script>
+        document.getElementsByClassName('follow-button')[0].addEventListener('click', function (e) {
+            let data = JSON.stringify({ username: e.target.id });
+            fetch('/user/follower/new', {
+                method: 'POST', body: data, headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: 'same-origin'
+            }).then(function () {
+                window.location.href = "/";
+            });
+        });
+    </script>
+</body>
+
+</html>
