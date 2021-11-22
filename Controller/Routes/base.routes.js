@@ -17,4 +17,8 @@ Router.get('/login', (req, res) => {
     res.render('login', { errors: [] });
 });
 
+Router.get('/new_article', (req, res) => {
+    res.render('new_article');
+});
+
 module.exports = Router;

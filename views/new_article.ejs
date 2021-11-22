@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a new article</title>
+</head>
+
+<body>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/search">Search</a>
+    <a href="/new_article">Create a new article</a>
+
+    <form action="/article/new" method="post" id="new-articles-1">
+        <input name="title" placeholder="title" required>
+        <br>
+
+        <input name="image" placeholder="image link">
+        <br>
+
+        <textarea name="description" placeholder="article description"></textarea>
+        <br>
+
+        <input name="tags" placeholder="tags">
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

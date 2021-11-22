@@ -34,7 +34,7 @@ app.set('view engine', 'ejs');
 app.use('/', baseRoutes);
 app.use('/auth/local', localRoutes);
 app.use('/auth/facebook', fbRoutes);
-app.use('/post', articleRoutes);
+app.use('/article', articleRoutes);
 app.use('/user', userRoutes);
 
 // Dummy route necessary for FB OAuth
