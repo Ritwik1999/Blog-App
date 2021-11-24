@@ -35,7 +35,6 @@ Router.post('/follower/add', (req, res) => {
 });
 
 Router.post('/follower/remove', (req, res) => {
-    console.log("HERE: ");
     if (req.session.user || req.user) {
         let user = req.session.user || req.user;
 
