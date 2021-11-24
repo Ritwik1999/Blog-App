@@ -4,7 +4,7 @@ const Article = require('../../Model/article.model');
 const User = require('../../Model/user.model');
 
 Router.get('/', (req, res) => {
-    if (req.session.user) {
+    if (req.session.user || req.user) {
         res.redirect('/dashboard');
     } else {
         res.redirect('/signup');
@@ -73,7 +73,7 @@ Router.get('/profile/:username', (req, res) => {
             })
             .catch(err => {
                 // if no user is found
-                res.recirect('/dashboard');
+                res.redirect('/dashboard');
             });
     } else {
         res.redirect('/');
