@@ -26,8 +26,11 @@
     <a href="/profile">Profile</a>
     <br>
 
+    <!-- Find an alternative to using `user.username` in the ID attribute (as using id="<%= user.username %> ") will break the functionality -->
     <% if (alreadyFollowingParamsUser==false) { %>
-        <button class="follow-button" id="<%= user.username %> ">Follow this user</button>
+        <button class="follow-button" id="<%= user.username %>">Follow this user</button>
+    <% } else if (!isSelf) { %>
+        <button class="unfollow-button" id="<%= user.username %>">Unfollow this user</button>
     <% } %>
 
     <div>
@@ -69,6 +72,24 @@
                 },
                 credentials: 'same-origin'
             }).then(function () {
+                window.location.href = "/";
+            }).catch(err => {
+                console.error(err);
+                window.location.href = "/";
+            });
+        });
+
+        document.getElementsByClassName('unfollow-button')[0].addEventListener('click', function (e) {
+            let data = JSON.stringify({ username: e.target.id });
+            fetch('/user/follower/remove', {
+                method: 'POST', body: data, headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: 'same-origin'
+            }).then(function () {
+                window.location.href = "/";
+            }).catch(err => {
+                console.error(err);
                 window.location.href = "/";
             });
         });
