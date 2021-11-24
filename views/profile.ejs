@@ -64,35 +64,37 @@
     <% }) %>
 
     <script>
-        document.getElementsByClassName('follow-button')[0].addEventListener('click', function (e) {
-            let data = JSON.stringify({ username: e.target.id });
-            fetch('/user/follower/new', {
-                method: 'POST', body: data, headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: 'same-origin'
-            }).then(function () {
-                window.location.href = "/";
-            }).catch(err => {
-                console.error(err);
-                window.location.href = "/";
+        if (document.getElementsByClassName('follow-button')[0]) {
+            document.getElementsByClassName('follow-button')[0].addEventListener('click', function (e) {
+                let data = JSON.stringify({ username: e.target.id });
+                fetch('/user/follower/add', {
+                    method: 'POST', body: data, headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: 'same-origin'
+                }).then(function () {
+                    window.location.href = "/";
+                }).catch(err => {
+                    console.error(err);
+                    window.location.href = "/";
+                });
             });
-        });
-
-        document.getElementsByClassName('unfollow-button')[0].addEventListener('click', function (e) {
-            let data = JSON.stringify({ username: e.target.id });
-            fetch('/user/follower/remove', {
-                method: 'POST', body: data, headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: 'same-origin'
-            }).then(function () {
-                window.location.href = "/";
-            }).catch(err => {
-                console.error(err);
-                window.location.href = "/";
+        } else {
+            document.getElementsByClassName('unfollow-button')[0].addEventListener('click', function (e) {
+                let data = JSON.stringify({ username: e.target.id });
+                fetch('/user/follower/remove', {
+                    method: 'POST', body: data, headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: 'same-origin'
+                }).then(function () {
+                    window.location.href = "/";
+                }).catch(err => {
+                    console.error(err);
+                    window.location.href = "/";
+                });
             });
-        });
+        }
     </script>
 </body>
 
