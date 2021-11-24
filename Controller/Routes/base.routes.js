@@ -61,13 +61,14 @@ Router.get('/dashboard', (req, res) => {
 Router.get('/profile/:username', (req, res) => {
     if (req.session.user || req.user) {
         let user = req.session.user || req.user;
+        let isSelf = req.params.username == user.username;
         let alreadyFollowingParamsUser = user.people_you_are_following.includes(req.params.username);
 
         User.findOne({ username: req.params.username })
             .then(user => {
                 Article.find({ author: user._id })
                     .then(articles => {
-                        res.render('profile', { articles, user, alreadyFollowingParamsUser });
+                        res.render('profile', { articles, user, isSelf, alreadyFollowingParamsUser });
                     });
             })
             .catch(err => {
